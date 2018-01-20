@@ -88,10 +88,15 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
+TW_INCLUDE_MTP := true
 TW_INCLUDE_FUSE_EXFAT := true
 TW_INCLUDE_NTFS_3G := true
 TW_EXCLUDE_SUPERSU := true
 TWRP_INCLUDE_LOGCAT := true
 TW_EXTRA_LANGUAGES := true
+#TW_INTERNAL_STORAGE_PATH := "/sdcard"
+#TW_INTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+TW_EXTERNAL_STORAGE_PATH := "/sdcard1"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard1"
 
 PRODUCT_COPY_FILES += device/xiaomi/mocha/dt.img:dt.img
