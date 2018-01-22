@@ -37,7 +37,10 @@ BOARD_RAMDISK_OFFSET := 0x02000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET) 
+TARGET_KERNEL_SOURCE := kernel/xiaomi/mocha
+TARGET_KERNEL_CONFIG := tegra12_android_defconfig
+BOARD_KERNEL_IMAGE_NAME := zImage
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_CUSTOM_BOOTIMG_MK := device/xiaomi/mocha/mkbootimg.mk
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -51,33 +54,11 @@ BOARD_PERSISTIMAGE_PARTITION_SIZE := 16777216
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20971520
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-# PowerHAL
-TARGET_POWERHAL_VARIANT := tegra
-
-# ThermalHAL
-TARGET_THERMALHAL_VARIANT := tegra
-
-# Graphics
-USE_OPENGL_RENDERER := true
-BOARD_DISABLE_TRIPLE_BUFFERED_DISPLAY_SURFACES := true
-
-# Offmode Charging
-BOARD_CHARGER_DISABLE_INIT_BLANK := true
-BACKLIGHT_PATH := "/sys/class/backlight/lcd-backlight/brightness"
-RED_LED_PATH := "/sys/class/leds/red/brightness"
-GREEN_LED_PATH := "/sys/class/leds/green/brightness"
-BLUE_LED_PATH := "/sys/class/leds/blue/brightness"
-
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
-
 # Per-application sizes for shader cache
 MAX_EGL_CACHE_SIZE := 4194304
 MAX_EGL_CACHE_ENTRY_SIZE := 262144
 
 # Recovery
-PRODUCT_COPY_FILES += device/xiaomi/mocha/dt.img:dt.img
-TARGET_PREBUILT_KERNEL := device/xiaomi/mocha/kernel
 TARGET_RECOVERY_DEVICE_DIRS += device/xiaomi/mocha
 TARGET_RECOVERY_FSTAB := device/xiaomi/mocha/twrp.fstab
 BOARD_NO_SECURE_DISCARD := true
@@ -98,6 +79,6 @@ TW_EXTERNAL_STORAGE_PATH := "/sdcard1"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard1"
 
 # disable reboot to recovery/bootloader, shield not support this
-TW_NO_REBOOT_BOOTLOADER := true
-TW_NO_REBOOT_RECOVERY := true
+#TW_NO_REBOOT_BOOTLOADER := true
+#TW_NO_REBOOT_RECOVERY := true
 
