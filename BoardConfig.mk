@@ -76,6 +76,7 @@ MAX_EGL_CACHE_SIZE := 4194304
 MAX_EGL_CACHE_ENTRY_SIZE := 262144
 
 # Recovery
+PRODUCT_COPY_FILES += device/xiaomi/mocha/dt.img:dt.img
 TARGET_PREBUILT_KERNEL := device/xiaomi/mocha/kernel
 TARGET_RECOVERY_DEVICE_DIRS += device/xiaomi/mocha
 TARGET_RECOVERY_FSTAB := device/xiaomi/mocha/twrp.fstab
@@ -88,15 +89,15 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
-TW_INCLUDE_MTP := true
-TW_INCLUDE_FUSE_EXFAT := true
 TW_INCLUDE_NTFS_3G := true
 TW_EXCLUDE_SUPERSU := true
 TWRP_INCLUDE_LOGCAT := true
-TW_EXTRA_LANGUAGES := true
 #TW_INTERNAL_STORAGE_PATH := "/sdcard"
 #TW_INTERNAL_STORAGE_MOUNT_POINT := "sdcard"
 TW_EXTERNAL_STORAGE_PATH := "/sdcard1"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard1"
 
-PRODUCT_COPY_FILES += device/xiaomi/mocha/dt.img:dt.img
+# disable reboot to recovery/bootloader, shield not support this
+TW_NO_REBOOT_BOOTLOADER := true
+TW_NO_REBOOT_RECOVERY := true
+
