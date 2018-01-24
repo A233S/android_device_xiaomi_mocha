@@ -21,6 +21,6 @@
 
 // disable local address rotation
 //#define BLE_PRIVACY_SPT FALSE
-#define BLE_LOCAL_PRIVACY_ENABLED FALSE
+//#define BLE_LOCAL_PRIVACY_ENABLED FALSE
 
 #endif
