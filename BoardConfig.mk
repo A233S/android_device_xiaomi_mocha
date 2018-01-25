@@ -79,7 +79,7 @@ BOARD_DISABLE_TRIPLE_BUFFERED_DISPLAY_SURFACES := true
 # CMHW
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS := \
-    hardware/mokee/cmhw \
+    hardware/cyanogen/cmhw \
     device/xiaomi/mocha/cmhw
 
 # Offmode Charging

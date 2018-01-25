@@ -23,8 +23,8 @@ import android.util.Log;
 import java.util.List;
 import java.util.ArrayList;
 
-import mokee.power.PerformanceManager;
-import mokee.power.PerformanceProfile;
+import cyanogenmod.power.PerformanceManager;
+import cyanogenmod.power.PerformanceProfile;
 
 public class PerformanceProfilesTile extends TileService {
 
@@ -41,10 +41,6 @@ public class PerformanceProfilesTile extends TileService {
 	mPerf = PerformanceManager.getInstance(this);
 	mProfiles = new ArrayList<>(mPerf.getPowerProfiles());
 	mCurrentProfile = mPerf.getActivePowerProfile().getId();
-	if (mCurrentProfile < 0 || mCurrentProfile > 3) {
-		mCurrentProfile = 3;
-	}
-	getQsTile().setState(Tile.STATE_ACTIVE);
 	updateTile();
     }
 
