@@ -1,0 +1,14 @@
+[
+ {
+   "remote": "github",
+   "branch": "cm-14.1",
+   "repository": "LineageOS/android_hardware_nvidia_thermal",
+   "target_path": "hardware/nvidia/thermal"
+ },
+ {
+   "remote": "github",
+   "branch": "cm-14.1",
+   "repository": "LineageOS/android_hardware_nvidia_libstagefrighthw",
+   "target_path": "hardware/nvidia/libstagefrighthw"
+ }
+]

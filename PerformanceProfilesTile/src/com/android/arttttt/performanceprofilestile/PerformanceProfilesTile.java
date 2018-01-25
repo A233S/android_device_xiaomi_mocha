@@ -23,69 +23,99 @@ import android.util.Log;
 import java.util.List;
 import java.util.ArrayList;
 
-import cyanogenmod.power.PerformanceManager;
-import cyanogenmod.power.PerformanceProfile;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class PerformanceProfilesTile extends TileService {
 
     private final String TAG = "PerformanceProfilesTile";
-
-    private PerformanceManager mPerf;
-    private List<PerformanceProfile> mProfiles;
     private int mCurrentProfile;
 
     @Override
     public void onStartListening() {
         super.onStartListening();
 
-	mPerf = PerformanceManager.getInstance(this);
-	mProfiles = new ArrayList<>(mPerf.getPowerProfiles());
-	mCurrentProfile = mPerf.getActivePowerProfile().getId();
-	updateTile();
+        mCurrentProfile = getProfileProperty();
+        if (mCurrentProfile < 0) {
+            mCurrentProfile = 3;
+            setProfileProperty(mCurrentProfile);
+        }
+        updateTile();
     }
 
     @Override
     public void onClick() {
         super.onClick();
 
-	switch(mCurrentProfile) {
-	    case 0:
-		mCurrentProfile = 3;
-		break;
-	    case 1:
-		mCurrentProfile = 2;
-		break;
-	    case 2:
-		mCurrentProfile = 0;
-		break;
-	    case 3:
-		mCurrentProfile = 1;
-		break;
-	}
-
-	updateTile();
-	mPerf.setPowerProfile(mCurrentProfile);
+        switch(mCurrentProfile) {
+            case 0:
+                mCurrentProfile = 3;
+                break;
+            case 1:
+                mCurrentProfile = 2;
+                break;
+            case 2:
+                mCurrentProfile = 0;
+                break;
+            case 3:
+                mCurrentProfile = 1;
+                break;
+            default:
+                mCurrentProfile = 3;
+                break;
+        }
+        mCurrentProfile = setProfileProperty(mCurrentProfile);
+        if (mCurrentProfile < 0) {
+            mCurrentProfile = 3;
+        }
+        updateTile();
     }
 
     private void updateTile() {
-	switch(mCurrentProfile) {
-	    case 0:
-		getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_profile_power_save));
-		getQsTile().setLabel(getString(R.string.power_save_profile_text));
-		break;
-	    case 1:
-		getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_profile_balanced));
-		getQsTile().setLabel(getString(R.string.balanced_profile_text));
-		break;
-	    case 2:
-		getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_notification_profile_high));
-		getQsTile().setLabel(getString(R.string.high_performance_profile_text));
-		break;
-	    case 3:
-		getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_profile_bias_power_save));
-		getQsTile().setLabel(getString(R.string.bias_power_save_profile_text));
-		break;
-	}
-	getQsTile().updateTile();
+        switch(mCurrentProfile) {
+            case 0:
+                getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_profile_power_save));
+                getQsTile().setLabel(getString(R.string.power_save_profile_text));
+                break;
+            case 1:
+                getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_profile_balanced));
+                getQsTile().setLabel(getString(R.string.balanced_profile_text));
+                break;
+            case 2:
+                getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_notification_profile_high));
+                getQsTile().setLabel(getString(R.string.high_performance_profile_text));
+                break;
+            case 3:
+                getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_profile_bias_power_save));
+                getQsTile().setLabel(getString(R.string.bias_power_save_profile_text));
+            break;
+        }
+        getQsTile().updateTile();
+    }
+
+    private int getProfileProperty() {
+        String line;
+
+        try {
+            Process p = Runtime.getRuntime().exec("getprop sys.perf.profile");
+            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            line = input.readLine();
+            input.close();
+            if (line != null) {
+                return Integer.parseInt(line.trim());
+            }
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+        return -1;
+    }
+
+    private int setProfileProperty(int value) {
+        try {
+            Runtime.getRuntime().exec("setprop sys.perf.profile " + Integer.toString(value));
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+        return getProfileProperty();
     }
 }
