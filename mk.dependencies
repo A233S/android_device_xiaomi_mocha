@@ -2,19 +2,19 @@
  {
    "remote": "github",
    "repository": "LineageOS/android_external_busybox",
-   "target_path": "external/busybox"
+   "target_path": "external/busybox",
    "revision": "cm-14.1"
  },
  {
    "remote": "github",
    "repository": "LineageOS/android_hardware_nvidia_thermal",
-   "target_path": "hardware/nvidia/thermal"
+   "target_path": "hardware/nvidia/thermal",
    "revision": "cm-14.1"
  },
  {
    "remote": "github",
    "repository": "LineageOS/android_hardware_nvidia_libstagefrighthw",
-   "target_path": "hardware/nvidia/libstagefrighthw"
+   "target_path": "hardware/nvidia/libstagefrighthw",
    "revision": "cm-14.1"
  }
 ]
