@@ -47,6 +47,7 @@ public class PerformanceProfilesTile extends TileService {
     public void onClick() {
         super.onClick();
 
+        mCurrentProfile = getProfileProperty();
         switch(mCurrentProfile) {
             case 0:
                 mCurrentProfile = 3;
