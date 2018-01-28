@@ -5,7 +5,7 @@ $(call inherit-product, device/xiaomi/mocha/full_mocha.mk)
 $(call inherit-product, vendor/aosp/common.mk)
 
 # boot animation res
-TARGET_BOOT_ANIMATION_RES := 1080
+TARGET_BOOT_ANIMATION_RES := 1536
 
 BOARD_VENDOR := Xiaomi
 PRODUCT_BRAND := Xiaomi
