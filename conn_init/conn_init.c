@@ -24,54 +24,100 @@
 #define TAG "conn_init"
 #define MAC_PARTION "/dev/block/platform/700b0600.sdhci/by-name/BKB"
 #define MAC_PARTION_OLD "/dev/block/platform/sdhci-tegra.3/by-name/BKB"
-#define BT_MAC_PROP "ro.bt.bdaddr_path"
-#define BT_ADDR_PROP1 "persist.service.bdroid.bdaddr"
-#define BT_ADDR_PROP2 "ro.boot.btmacaddr"
+#define PROPERTY_BT_BDADDR_PATH "ro.bt.bdaddr_path"
+#define PERSIST_BDADDR_PROPERTY "persist.service.bdroid.bdaddr"
+#define FACTORY_BT_ADDR_PROPERTY "ro.boot.btmacaddr"
 #define WIFI_MAC_PROP "/sys/module/bcmdhd/parameters/mac"
 #define BT_MAC_FILE "/data/misc/bluetooth/bt_mac.conf"
+
+int isValidMacAddress(const char* mac) {
+    int i = 0;
+    int s = 0;
+    int cnt = 0;
+
+    while (*mac) {
+        if (isxdigit(*mac)) {
+            i++;
+            if (i > 2) {
+                return 0;
+            }
+        } else if (*mac == ':') {
+            if (i == 0) {
+                return 0;
+            }
+            ++s;
+            i = 0;
+        }
+        else {
+            return 0;
+        }
+        ++mac;
+    }
+    if (s != 5)
+        return 0;
+    return 1;
+}
 
 void set_bt_mac(FILE *fp) {
 	char buf[30];
 	FILE *bmfp;
-        char addr[18];
-        char old_addr[18];
+    char addr[18];
 
+/*
+in /system/bt/btif/btif_core.c, btif_fetch_local_bdaddr() load BT addrees:
+1. load it from file in PROPERTY_BT_BDADDR_PATH
+2. load it from /data/misc/bluedroid/bt_config.conf or bt_config.xml, section "Adapter", setting "Address"
+3. load it from PERSIST_BDADDR_PROPERTY
+4. load it from FACTORY_BT_ADDR_PROPERTY
+5. load it from ro.boot.btmacaddr
+
+so we should set PROPERTY_BT_BDADDR_PATH to correct file, and write bt mac to this file if it's not exist.
+if this file exists, we assume already write it or user change it, just read it and if it's format correct, use it.
+if not, write bt mac address to this file.
+*/
+	memset(addr, '\0', 18);
+	bmfp = fopen(BT_MAC_FILE, "r");
+	if (bmfp != NULL) {
+		fseek(bmfp, 0, SEEK_SET);
+		fread(old_addr, sizeof(char), 17, bmfp);
+		fclose(bmfp);
+        if (isValidMacAddress(addr)) {
+            property_set(PROPERTY_BT_BDADDR_PATH, BT_MAC_FILE);
+            property_set(PERSIST_BDADDR_PROPERTY, addr);
+            property_set(FACTORY_BT_ADDR_PROPERTY, addr);
+            return;
+        }
+    }
+    // not exist or wrong format
 	fseek(fp, 0, SEEK_SET);
 	fread(buf, sizeof(char), 22, fp);
-	sprintf(addr, "%02x:%02x:%02x:%02x:%02x:%02x", 
+	sprintf(addr, "%02x:%02x:%02x:%02x:%02x:%02x",
 		(unsigned char)buf[14],
 		(unsigned char)buf[13],
 		(unsigned char)buf[12],
 		(unsigned char)buf[11],
 		(unsigned char)buf[10],
 		(unsigned char)buf[9]);
-	property_set(BT_ADDR_PROP1, addr);
-	property_set(BT_ADDR_PROP2, addr);
 
-	memset(old_addr, '\0', 18);
-	bmfp = fopen(BT_MAC_FILE, "r");
-	if (bmfp != NULL) {
-		fseek(bmfp, 0, SEEK_SET);
-		fread(old_addr, sizeof(char), 17, bmfp);
-		fclose(bmfp);
+    bmfp = fopen(BT_MAC_FILE, "w");
+    if (bmfp == NULL) {
+        property_set(PERSIST_BDADDR_PROPERTY, addr);
+        property_set(FACTORY_BT_ADDR_PROPERTY, addr);
+        ALOGE("%s: Can't open %s error: %d", TAG, BT_MAC_FILE, errno);
+        return;
+    } else {
+        fprintf(bmfp, "%s\n", addr);
+        fclose(bmfp);
 	}
-	if (strcmp(addr, old_addr) != 0) {
-		bmfp = fopen(BT_MAC_FILE, "w");
-		if (bmfp == NULL) {
-			ALOGE("%s: Can't open %s error: %d", TAG, BT_MAC_FILE, errno);
-			return;
-		} else {
-			fprintf(bmfp, "%s\n", addr);
-			fclose(bmfp);
-		}
-	}
-	property_set(BT_MAC_PROP, BT_MAC_FILE);
+    property_set(PROPERTY_BT_BDADDR_PATH, BT_MAC_FILE);
+    property_set(PERSIST_BDADDR_PROPERTY, addr);
+    property_set(FACTORY_BT_ADDR_PROPERTY, addr);
 }
 
 void set_wifi_mac(FILE *fp)
 {
 	char buf[30];
-	
+
 	fseek(fp, sizeof(char) * 22, SEEK_SET);
 	fread(buf, sizeof(char), 22, fp);
 
