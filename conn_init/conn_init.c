@@ -34,28 +34,38 @@ void set_bt_mac(FILE *fp) {
 	char buf[30];
 	FILE *bmfp;
         char addr[18];
+        char old_addr[18];
 
 	fseek(fp, 0, SEEK_SET);
 	fread(buf, sizeof(char), 22, fp);
-
-	bmfp = fopen(BT_MAC_FILE, "w");
-	if (bmfp == NULL) {
-		ALOGE("%s: Can't open %s error: %d", TAG, BT_MAC_FILE, errno);
-		return;
-	} else {
-		sprintf(addr, "%02x:%02x:%02x:%02x:%02x:%02x", 
-			(unsigned char)buf[14],
-			(unsigned char)buf[13],
-			(unsigned char)buf[12],
-			(unsigned char)buf[11],
-			(unsigned char)buf[10],
-			(unsigned char)buf[9]);
-		fprintf(bmfp, "%s\n", addr);
-		fclose(bmfp);
-	}
-	property_set(BT_MAC_PROP, BT_MAC_FILE);
+	sprintf(addr, "%02x:%02x:%02x:%02x:%02x:%02x", 
+		(unsigned char)buf[14],
+		(unsigned char)buf[13],
+		(unsigned char)buf[12],
+		(unsigned char)buf[11],
+		(unsigned char)buf[10],
+		(unsigned char)buf[9]);
 	property_set(BT_ADDR_PROP1, addr);
 	property_set(BT_ADDR_PROP2, addr);
+
+	memset(old_addr, '\0', 18);
+	bmfp = fopen(BT_MAC_FILE, "r");
+	if (bmfp != NULL) {
+		fseek(bmfp, 0, SEEK_SET);
+		fread(old_addr, sizeof(char), 17, bmfp);
+		fclose(bmfp);
+	}
+	if (strcmp(addr, old_addr) != 0) {
+		bmfp = fopen(BT_MAC_FILE, "w");
+		if (bmfp == NULL) {
+			ALOGE("%s: Can't open %s error: %d", TAG, BT_MAC_FILE, errno);
+			return;
+		} else {
+			fprintf(bmfp, "%s\n", addr);
+			fclose(bmfp);
+		}
+	}
+	property_set(BT_MAC_PROP, BT_MAC_FILE);
 }
 
 void set_wifi_mac(FILE *fp)
