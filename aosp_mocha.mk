@@ -4,6 +4,9 @@ $(call inherit-product, device/xiaomi/mocha/full_mocha.mk)
 # Inherit some common AOSP-OMS stuff.
 $(call inherit-product, vendor/aosp/common.mk)
 
+# boot animation res
+TARGET_BOOT_ANIMATION_RES := 1080
+
 BOARD_VENDOR := Xiaomi
 PRODUCT_BRAND := Xiaomi
 PRODUCT_DEVICE := mocha
