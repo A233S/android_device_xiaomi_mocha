@@ -35,11 +35,12 @@ public class PerformanceProfilesTile extends TileService {
     public void onStartListening() {
         super.onStartListening();
 
-        mCurrentProfile = getProfileProperty();
+	Tile tile = getQsTile();
+        mCurrentProfile = setProfileProperty(mCurrentProfile);
         if (mCurrentProfile < 0) {
             mCurrentProfile = 3;
-            setProfileProperty(mCurrentProfile);
         }
+	tile.setState(Tile.STATE_ACTIVE);
         updateTile();
     }
 
@@ -73,25 +74,26 @@ public class PerformanceProfilesTile extends TileService {
     }
 
     private void updateTile() {
+	Tile tile = getQsTile();
         switch(mCurrentProfile) {
             case 0:
-                getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_profile_power_save));
-                getQsTile().setLabel(getString(R.string.power_save_profile_text));
+                tile.setIcon(Icon.createWithResource(this, R.drawable.ic_profile_power_save));
+                tile.setLabel(getString(R.string.power_save_profile_text));
                 break;
             case 1:
-                getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_profile_balanced));
-                getQsTile().setLabel(getString(R.string.balanced_profile_text));
+                tile.setIcon(Icon.createWithResource(this, R.drawable.ic_profile_balanced));
+                tile.setLabel(getString(R.string.balanced_profile_text));
                 break;
             case 2:
-                getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_notification_profile_high));
-                getQsTile().setLabel(getString(R.string.high_performance_profile_text));
+                tile.setIcon(Icon.createWithResource(this, R.drawable.ic_notification_profile_high));
+                tile.setLabel(getString(R.string.high_performance_profile_text));
                 break;
             case 3:
-                getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_profile_bias_power_save));
-                getQsTile().setLabel(getString(R.string.bias_power_save_profile_text));
+                tile.setIcon(Icon.createWithResource(this, R.drawable.ic_profile_bias_power_save));
+                tile.setLabel(getString(R.string.bias_power_save_profile_text));
             break;
         }
-        getQsTile().updateTile();
+        tile.updateTile();
     }
 
     private int getProfileProperty() {
