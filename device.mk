@@ -25,6 +25,11 @@ $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk
 
 $(call inherit-product-if-exists, vendor/nvidia/shield/mocha.mk)
 
+PRODUCT_COPY_FILES_OVERRIDES += \
+    system/etc/apns-conf.xml \
+    system/etc/selective-spn-conf.xml \
+    system/etc/sensitive_pn.xml
+
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
     device/xiaomi/mocha/overlay
