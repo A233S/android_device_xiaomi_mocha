@@ -17,4 +17,7 @@ LOCAL_PRIVILEGED_MODULE := true
 
 LOCAL_PACKAGE_NAME := PerformanceTile
 
+# don't install some apk
+LOCAL_OVERRIDES_PACKAGES := Stk CellBroadcastReceiver
+
 include $(BUILD_PACKAGE)
