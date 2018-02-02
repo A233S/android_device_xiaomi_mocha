@@ -70,6 +70,7 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
+TW_NO_EXFAT_FUSE := true
 TW_INCLUDE_NTFS_3G := true
 TW_EXCLUDE_SUPERSU := true
 TWRP_INCLUDE_LOGCAT := true
