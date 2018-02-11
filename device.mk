@@ -110,7 +110,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/aptXHD/libaptXScheduler.so:system/vendor/lib/libaptXScheduler.so
 
 # busybox
-PRODUCT_PACKAGES += busybox
+PRODUCT_PACKAGES += \
+    busybox \
+    busybox_links
 
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
