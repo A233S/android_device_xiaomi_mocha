@@ -1,0 +1,13 @@
+--- frameworks/native/services/inputflinger/InputReader.cpp.orig	2018-02-14 08:52:52.597039075 +0800
++++ frameworks/native/services/inputflinger/InputReader.cpp	2018-02-14 08:52:58.554977343 +0800
+@@ -2183,7 +2183,9 @@
+         // mode 0 (disabled) ~ offset 4
+         // mode 1 (phone) ~ offset 2
+         // mode 2 (tablet) ~ offset 0
+-        mRotationMapOffset = 4 - 2 * config->volumeKeysRotationMode;
++        //mRotationMapOffset = 4 - 2 * config->volumeKeysRotationMode;
++	// make tablet as phone
++        mRotationMapOffset = (config->volumeKeysRotationMode == 0 ? 4 : 2);
+     }
+ }
+ 
