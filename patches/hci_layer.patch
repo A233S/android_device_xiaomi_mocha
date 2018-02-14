@@ -1,0 +1,22 @@
+--- system/bt/hci/src/hci_layer.c.orig	2018-01-10 10:05:08.217380003 +0800
++++ system/bt/hci/src/hci_layer.c	2018-02-14 06:53:23.767200338 +0800
+@@ -410,9 +410,16 @@
+     command_complete_cb complete_callback,
+     command_status_cb status_callback,
+     void *context) {
+-  if (hci_state < HCI_STARTED) {
+-    LOG_ERROR("%s Returning, hci_layer not ready", __func__);
+-    return;
++  // FIX race condition when vendor call transmit_command() but hci_layer is not ready
++  int i = 0;
++  while (hci_state < HCI_STARTED) {
++    if (i > 10) {
++      LOG_ERROR(LOG_TAG, "%s Returning, hci_layer not ready", __func__);
++      return;
++    }
++    i++;
++    LOG_ERROR(LOG_TAG, "%s Waitting, hci_layer not ready, try again later", __func__);
++    usleep(100);
+   }
+ 
+   waiting_command_t *wait_entry = osi_calloc(sizeof(waiting_command_t));
