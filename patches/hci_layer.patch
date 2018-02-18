@@ -10,13 +10,13 @@
 +  // FIX race condition when vendor call transmit_command() but hci_layer is not ready
 +  int i = 0;
 +  while (hci_state < HCI_STARTED) {
-+    if (i > 10) {
++    if (i > 1000) {
 +      LOG_ERROR(LOG_TAG, "%s Returning, hci_layer not ready", __func__);
 +      return;
 +    }
 +    i++;
 +    LOG_ERROR(LOG_TAG, "%s Waitting, hci_layer not ready, try again later", __func__);
-+    usleep(100);
++    usleep(1000);
    }
  
    waiting_command_t *wait_entry = osi_calloc(sizeof(waiting_command_t));
