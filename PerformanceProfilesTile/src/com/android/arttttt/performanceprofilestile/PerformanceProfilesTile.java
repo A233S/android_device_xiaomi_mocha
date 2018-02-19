@@ -93,6 +93,7 @@ public class PerformanceProfilesTile extends TileService {
                 tile.setLabel(getString(R.string.bias_power_save_profile_text));
             break;
         }
+	tile.setState(Tile.STATE_ACTIVE);
         tile.updateTile();
     }
 
