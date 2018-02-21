@@ -1,0 +1,12 @@
+--- external/wpa_supplicant_8/wpa_supplicant/config.c.orig	2018-02-20 22:13:24.507772215 +0800
++++ external/wpa_supplicant_8/wpa_supplicant/config.c	2018-02-20 22:12:55.320056899 +0800
+@@ -209,6 +209,9 @@
+ 			   line, value);
+ 		return -1;
+ 	}
++	// always set p2p_disabled to 0
++	if (os_strcmp(data->name, "p2p_disabled") == 0) 
++		val = 0;
+ 
+ 	if (*dst == val)
+ 		return 1;
