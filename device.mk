@@ -132,6 +132,9 @@ PRODUCT_PACKAGES += \
     xaplay \
     enctune.conf
 
+# Wifi Direct
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
