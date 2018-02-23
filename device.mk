@@ -110,7 +110,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/aptXHD/libaptXScheduler.so:system/vendor/lib/libaptXScheduler.so
 
 # busybox
-PRODUCT_PACKAGES += busybox
+PRODUCT_PACKAGES += \
+    busybox \
+    busybox_links
 
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
@@ -130,10 +132,6 @@ PRODUCT_PACKAGES += \
     xaplay \
     enctune.conf
 
-# Wifi Direct
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
-
 # Bluetooth
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
@@ -145,7 +143,8 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wifi/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
+    $(LOCAL_PATH)/wifi/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
+    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
 # Wifi
 # All Shield devices xurrently use broadcom wifi / bluetooth modules
