@@ -35,12 +35,11 @@ public class PerformanceProfilesTile extends TileService {
     public void onStartListening() {
         super.onStartListening();
 
-	Tile tile = getQsTile();
-        mCurrentProfile = setProfileProperty(mCurrentProfile);
+        mCurrentProfile = getProfileProperty();
         if (mCurrentProfile < 0) {
             mCurrentProfile = 3;
+            mCurrentProfile = setProfileProperty(mCurrentProfile);
         }
-	tile.setState(Tile.STATE_ACTIVE);
         updateTile();
     }
 
@@ -101,23 +100,29 @@ public class PerformanceProfilesTile extends TileService {
         String line;
 
         try {
+            Log.d(TAG, "execute: getprop sys.perf.profile");
             Process p = Runtime.getRuntime().exec("getprop sys.perf.profile");
             BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
             line = input.readLine();
             input.close();
             if (line != null) {
+                Log.d(TAG, "result: " + line);
                 return Integer.parseInt(line.trim());
             }
         } catch (Exception err) {
+            Log.d(TAG, "execute failed");
             err.printStackTrace();
         }
+        Log.d(TAG, "can't get sys.perf.profile value, return -1");
         return -1;
     }
 
     private int setProfileProperty(int value) {
         try {
+            Log.d(TAG, "execute: setprop sys.perf.profile " + Integer.toString(value));
             Runtime.getRuntime().exec("setprop sys.perf.profile " + Integer.toString(value));
         } catch (Exception err) {
+            Log.d(TAG, "execute failed");
             err.printStackTrace();
         }
         return getProfileProperty();
