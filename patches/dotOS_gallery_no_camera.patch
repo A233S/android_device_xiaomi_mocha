@@ -1,0 +1,19 @@
+diff -Nur packages/apps/Gallery2.orig/src/com/android/camera/DisableCameraReceiver.java.orig packages/apps/Gallery2/src/com/android/camera/DisableCameraReceiver.java
+--- packages/apps/Gallery2.orig/src/com/android/camera/DisableCameraReceiver.java.orig	2018-02-07 23:24:49.658750035 +0800
++++ packages/apps/Gallery2/src/com/android/camera/DisableCameraReceiver.java	2018-02-08 10:18:55.419450328 +0800
+@@ -73,6 +73,8 @@
+     }
+ 
+     private void disableComponent(Context context, String klass) {
++	return;
++/*
+         ComponentName name = new ComponentName(context, klass);
+         PackageManager pm = context.getPackageManager();
+ 
+@@ -81,5 +83,6 @@
+         pm.setComponentEnabledSetting(name,
+             PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+             PackageManager.DONT_KILL_APP);
++*/
+     }
+ }
