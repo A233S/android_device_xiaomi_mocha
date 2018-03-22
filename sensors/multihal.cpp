@@ -39,7 +39,7 @@
 #include <limits.h>
 #include <stdlib.h>
 
-static const char* CONFIG_FILENAME = "/system/etc/sensors/hals.conf";
+static const char* CONFIG_FILENAME = "/vendor/etc/sensors/hals.conf";
 static const int MAX_CONF_LINE_LENGTH = 1024;
 
 static pthread_mutex_t init_modules_mutex = PTHREAD_MUTEX_INITIALIZER;
