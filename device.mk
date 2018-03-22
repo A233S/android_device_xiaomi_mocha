@@ -191,7 +191,7 @@ PRODUCT_PACKAGES += \
 
 # Multi HAL configuration file
 PRODUCT_COPY_FILES += \
-    device/xiaomi/mocha/sensors/etc/hals.conf:system/etc/sensors/hals.conf
+    device/xiaomi/mocha/sensors/etc/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
 
 # Packaging
 BLOCK_BASED_OTA := false
