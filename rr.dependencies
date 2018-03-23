@@ -1,12 +1,6 @@
 [
  {
    "remote": "github",
-   "branch": "cm-14.1",
-   "repository": "LineageOS/android_external_busybox",
-   "target_path": "external/busybox"
- },
- {
-   "remote": "github",
    "branch": "lineage-15.1",
    "repository": "LineageOS/android_hardware_nvidia_thermal",
    "target_path": "hardware/nvidia/thermal"
