@@ -7,7 +7,7 @@
 +        // Hack for fix WIFI Tether on some devices
 +        if(mTetherStates.get(chosenIface) == null) {
 +            Log.e(TAG, "Adding non-existent Iface: " + chosenIface);
-+            trackNewTetherableInterface(chosenIface, interfaceType);
++            maybeTrackNewInterfaceLocked(chosenIface, interfaceType);
 +        }
 +
          changeInterfaceState(chosenIface, requestedState);
