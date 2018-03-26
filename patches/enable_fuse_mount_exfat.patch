@@ -1,0 +1,7 @@
+--- external/exfat/Android.mk.orig	2018-03-26 09:20:35.179193779 +0800
++++ external/exfat/Android.mk	2018-03-26 09:19:58.626531035 +0800
+@@ -3,3 +3,4 @@
+ include $(FUSE_ROOT)/libexfat/Android.mk
+ include $(FUSE_ROOT)/mkfs/Android.mk
+ include $(FUSE_ROOT)/fsck/Android.mk
++include $(FUSE_ROOT)/fuse/Android.mk
