@@ -145,6 +145,10 @@ PRODUCT_PACKAGES += \
     xaplay \
     enctune.conf
 
+# exFAT tools
+PRODUCT_PACKAGES += \
+    mount.exfat
+
 # Bluetooth
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
