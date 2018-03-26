@@ -1,6 +1,6 @@
---- frameworks/base/services/core/java/com/android/server/connectivity/Tethering.java.orig	2018-02-14 06:55:15.102032989 +0800
-+++ frameworks/base/services/core/java/com/android/server/connectivity/Tethering.java	2018-02-14 06:55:46.766701043 +0800
-@@ -1133,6 +1133,12 @@
+--- frameworks/base/services/core/java/com/android/server/connectivity/Tethering.java.orig	2018-03-26 11:03:41.607870948 +0800
++++ frameworks/base/services/core/java/com/android/server/connectivity/Tethering.java	2018-03-26 11:04:20.295512856 +0800
+@@ -976,6 +976,12 @@
              return;
          }
  
@@ -10,6 +10,6 @@
 +            trackNewTetherableInterface(chosenIface, interfaceType);
 +        }
 +
-         int result = (enable ? tether(chosenIface) : untether(chosenIface));
-         if (result != ConnectivityManager.TETHER_ERROR_NO_ERROR) {
-             Log.e(TAG, "unable start or stop tethering on iface " + chosenIface);
+         changeInterfaceState(chosenIface, requestedState);
+     }
+ 
