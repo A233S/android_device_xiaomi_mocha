@@ -111,17 +111,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \
     $(LOCAL_PATH)/audio/audio.mocha.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio.mocha.xml
 
-# aptXHD
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/aptXHD/libaptX-1.0.0-rel-Android21-ARMv7A.so:system/vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so \
-    $(LOCAL_PATH)/aptXHD/libaptXHD-1.0.0-rel-Android21-ARMv7A.so:system/vendor/lib/libaptXHD-1.0.0-rel-Android21-ARMv7A.so \
-    $(LOCAL_PATH)/aptXHD/libaptXScheduler.so:system/vendor/lib/libaptXScheduler.so
-
-# busybox
-PRODUCT_PACKAGES += \
-    busybox \
-    busybox_links
-
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
