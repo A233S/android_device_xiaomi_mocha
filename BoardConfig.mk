@@ -23,8 +23,6 @@ TARGET_SCREEN_WIDTH := 1536
 TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/mocha/include
 TARGET_KERNEL_HAVE_EXFAT := true
 TARGET_KERNEL_HAVE_NTFS := true
-WITH_DEXPREOPT := false
-DISABLE_DEXPREOPT := true
 
 
 # Architecture
