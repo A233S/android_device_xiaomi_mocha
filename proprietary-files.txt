@@ -71,6 +71,8 @@ vendor/lib/hw/hwcomposer.tegra.so
 vendor/lib/hw/keystore.tegra.so
 vendor/lib/hw/memtrack.tegra.so
 vendor/lib/hw/ts.default.so
+vendor/lib/libaptX_encoder.so
+vendor/lib/libaptXHD_encoder.so
 vendor/lib/libaudioavp.so
 vendor/lib/libclcore_nvidia.bc
 vendor/lib/libcuda.so

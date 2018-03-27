@@ -111,6 +111,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \
     $(LOCAL_PATH)/audio/audio.mocha.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio.mocha.xml
 
+# aptXHD
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/aptXHD/libaptX_encoder.so:system/vendor/lib/libaptX_encoder.so \
+    $(LOCAL_PATH)/aptXHD/libaptXHD_encoder.so:system/vendor/lib/libaptXHD_encoder.so
+
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
