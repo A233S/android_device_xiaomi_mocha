@@ -29,6 +29,13 @@ $(call inherit-product-if-exists, vendor/nvidia/shield/mocha.mk)
 DEVICE_PACKAGE_OVERLAYS += \
     device/xiaomi/mocha/overlay
 
+# HIDL HALs
+$(call inherit-product, device/xiaomi/mocha/hidl.mk)
+
+# Graphics shim
+PRODUCT_PACKAGES += libs \
+                    libshim_zw
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.tn8 \
@@ -92,16 +99,17 @@ PRODUCT_COPY_FILES += \
 
 # Media config
 PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-    $(LOCAL_PATH)/media/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/media/media_profiles.xml:system/etc/media_profiles.xml \
-    $(LOCAL_PATH)/media/media_codecs_performance.xml:system/etc/media_codecs_performance.xml
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
+    frameworks/av/media/libeffects/data/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
+    $(LOCAL_PATH)/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    $(LOCAL_PATH)/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
+    $(LOCAL_PATH)/media/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
 
 # Audio
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/audio/audio.mocha.xml:system/etc/audio.mocha.xml
+    $(LOCAL_PATH)/audio/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \
+    $(LOCAL_PATH)/audio/audio.mocha.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio.mocha.xml
 
 # aptXHD
 PRODUCT_COPY_FILES += \
@@ -126,11 +134,16 @@ PRODUCT_PACKAGES += \
     libtinycompress \
     tinycap_mocha \
     tinymix_mocha \
+    tinypcminfo_mocha \
     tinyplay_mocha \
     libtinyalsa_mocha \
     libtinyalsa \
     xaplay \
     enctune.conf
+
+# exFAT tools
+PRODUCT_PACKAGES += \
+    mount.exfat
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
@@ -180,7 +193,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
 # Power
-PRODUCT_PACKAGES += power.tegra
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.0-service.mocha
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -188,7 +202,7 @@ PRODUCT_PACKAGES += \
 
 # Multi HAL configuration file
 PRODUCT_COPY_FILES += \
-    device/xiaomi/mocha/sensors/etc/hals.conf:system/etc/sensors/hals.conf
+    device/xiaomi/mocha/sensors/etc/_hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/_hals.conf
 
 # Packaging
 BLOCK_BASED_OTA := false
@@ -204,3 +218,7 @@ PRODUCT_COPY_FILES += \
 # Console Mode
 $(call inherit-product-if-exists, vendor/xiaomi/mocha/consolemode-blobs.mk)
 
+# Vendor seccomp policy files for media components:
+PRODUCT_COPY_FILES += \
+    device/xiaomi/mocha/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
+    device/xiaomi/mocha/seccomp/mediaextractor.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
