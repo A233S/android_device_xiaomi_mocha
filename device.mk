@@ -129,6 +129,7 @@ PRODUCT_PACKAGES += \
     libtinycompress \
     tinycap_mocha \
     tinymix_mocha \
+    tinypcminfo_mocha \
     tinyplay_mocha \
     libtinyalsa_mocha \
     libtinyalsa \
@@ -187,7 +188,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
 # Power
-PRODUCT_PACKAGES += power.tegra
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.0-service.mocha
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -195,7 +197,7 @@ PRODUCT_PACKAGES += \
 
 # Multi HAL configuration file
 PRODUCT_COPY_FILES += \
-    device/xiaomi/mocha/sensors/etc/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
+    device/xiaomi/mocha/sensors/etc/_hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/_hals.conf
 
 # Packaging
 BLOCK_BASED_OTA := false

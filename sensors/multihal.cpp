@@ -17,7 +17,7 @@
 #include "SensorEventQueue.h"
 #include "multihal.h"
 
-#define LOG_NDEBUG 1
+#define LOG_NDEBUG 0
 #include <cutils/log.h>
 #include <cutils/atomic.h>
 #include <hardware/sensors.h>
@@ -403,32 +403,21 @@ int sensors_poll_context_t::batch(int handle, int flags, int64_t period_ns, int6
         }
 
         retval = v1->setDelay((sensors_poll_device_t*)v1, handle, period_ns);
-
-        // Batch should only fail for internal errors
-        if (retval < 0) {
-            ALOGE("setDelay() returned %d", retval);
-        }
     } else {
         ALOGE("IGNORING batch() call to non-API-compliant sensor handle=%d !", handle);
     }
-    ALOGV("retval %d", retval);
-    return retval;
+    ALOGE("batch retval %d", retval);
+    // Always return OK
+    return 0;
 }
 
 int sensors_poll_context_t::flush(int handle) {
-    ALOGV("flush");
+   ALOGV("flush");
     int retval = -EINVAL;
     int local_handle = get_local_handle(handle);
     sensors_poll_device_1_t* v1 = this->get_v1_device_by_handle(handle);
     if (local_handle >= 0 && v1) {
-        if (halIsAPILevelCompliant(this, handle, SENSORS_DEVICE_API_VERSION_1_1)) {
-            retval = v1->flush(v1, local_handle);
-        } else {
-            // FIXME: for now sensorservice allows -EINVAL as return value
-            // for non-oneshot sensors. This may change in future and flush()
-            // will need to generate META_DATA_FLUSH_COMPLETE events.
-            retval = -EINVAL;
-        }
+        retval = v1->flush(v1, local_handle);
     } else {
         ALOGE("IGNORING flush() call to non-API-compliant sensor handle=%d !", handle);
     }
@@ -497,7 +486,9 @@ static int device__poll(struct sensors_poll_device_t *dev, sensors_event_t* data
 static int device__batch(struct sensors_poll_device_1 *dev, int handle,
         int flags, int64_t period_ns, int64_t timeout) {
     sensors_poll_context_t* ctx = (sensors_poll_context_t*) dev;
-    return ctx->batch(handle, flags, period_ns, timeout);
+    (void)(flags);
+    (void)(timeout);
+    return ctx->setDelay(handle, period_ns);
 }
 
 static int device__flush(struct sensors_poll_device_1 *dev, int handle) {
