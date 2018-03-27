@@ -24,8 +24,6 @@ TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/mocha/include
 TARGET_EXFAT_DRIVER := exfat
 TARGET_KERNEL_HAVE_EXFAT := true
 TARGET_KERNEL_HAVE_NTFS := true
-WITH_DEXPREOPT := false
-DISABLE_DEXPREOPT := true
 
 # Architecture
 TARGET_CPU_ABI := armeabi-v7a
