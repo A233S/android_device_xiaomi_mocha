@@ -23,8 +23,8 @@ import android.util.Log;
 import java.util.List;
 import java.util.ArrayList;
 
-import mokee.power.PerformanceManager;
-import mokee.power.PerformanceProfile;
+import lineageos.power.PerformanceManager;
+import lineageos.power.PerformanceProfile;
 
 public class PerformanceProfilesTile extends TileService {
 
