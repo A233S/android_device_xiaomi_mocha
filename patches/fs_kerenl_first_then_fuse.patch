@@ -76,3 +76,13 @@ diff -Nur system/vold/fs.orig/Ntfs.cpp system/vold/fs/Ntfs.cpp
      sprintf(mountData,
              "utf8,uid=%d,gid=%d,fmask=%o,dmask=%o,"
              "shortname=mixed,nodev,nosuid,dirsync",
+--- system/vold/Utils.cpp.orig	2018-03-25 22:50:12.568481109 +0800
++++ system/vold/Utils.cpp	2018-03-25 22:50:46.643182364 +0800
+@@ -571,6 +571,7 @@
+     if (supported.find(CONFIG_EXFAT_DRIVER "\n") != std::string::npos)
+         supported.append("nodev\texfat\n");
+ #endif
++    supported.append("fuse\texfat\n");
+ 
+     return supported.find(fsType + "\n") != std::string::npos;
+ }
