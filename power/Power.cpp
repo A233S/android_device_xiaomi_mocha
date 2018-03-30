@@ -77,8 +77,8 @@ Return<void> Power::getPlatformLowPowerStats(getPlatformLowPowerStats_cb _hidl_c
     return Void();
 }
 
-Return<int32_t> Power::getFeature(LineageFeature feature)  {
-    if (feature == LineageFeature::SUPPORTED_PROFILES) {
+Return<int32_t> Power::getFeature(MoKeeFeature feature)  {
+    if (feature == MoKeeFeature::SUPPORTED_PROFILES) {
         ALOGI("power profiles POWER_FEATURE_SUPPORTED_PROFILES\n");
         return PROFILE_MAX;
     }
@@ -96,12 +96,12 @@ status_t Power::registerAsSystemService() {
         ALOGI("Successfully registered IPower");
     }
 
-    ret = ILineagePower::registerAsService();
+    ret = IMoKeePower::registerAsService();
     if (ret != 0) {
-        ALOGE("Failed to register ILineagePower (%d)", ret);
+        ALOGE("Failed to register IMoKeePower (%d)", ret);
         goto fail;
     } else {
-        ALOGI("Successfully registered ILineagePower");
+        ALOGI("Successfully registered IMoKeePower");
     }
 
 fail:
