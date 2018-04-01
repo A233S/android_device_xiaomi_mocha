@@ -20,8 +20,11 @@
 TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/mocha/include
 TARGET_KERNEL_HAVE_EXFAT := true
 TARGET_KERNEL_HAVE_NTFS := true
-WITH_DEXPREOPT := false
-DISABLE_DEXPREOPT := true
+WITH_DEXPREOPT := true
+
+# Binder API version
+TARGET_USES_64_BIT_BINDER := true
+>>>>>>> a2df177... WITH_DEXPREOPT := true
 
 # Architecture
 TARGET_CPU_ABI := armeabi-v7a
