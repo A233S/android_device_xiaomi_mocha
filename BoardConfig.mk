@@ -22,6 +22,9 @@ TARGET_EXFAT_DRIVER := exfat
 TARGET_KERNEL_HAVE_EXFAT := true
 TARGET_KERNEL_HAVE_NTFS := true
 
+# Binder API version
+TARGET_USES_64_BIT_BINDER := true
+
 # Architecture
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
