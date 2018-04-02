@@ -21,7 +21,6 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := sensors.$(TARGET_BOARD_PLATFORM)
 
 LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_PROPRIETARY_MODULE := true
 
 LOCAL_CFLAGS := -DLOG_TAG=\"MultiHal\"
 
@@ -33,9 +32,13 @@ LOCAL_SHARED_LIBRARIES := \
     libcutils \
     libdl \
     liblog \
-    libutils \
+    libutils 
+
 
 LOCAL_STRIP_MODULE := false
+
+LOCAL_C_INCLUDES := \
+    bionic \
 
 include $(BUILD_SHARED_LIBRARY)
 
