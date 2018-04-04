@@ -27,7 +27,6 @@
 #define BT_MAC_PROP "ro.bt.bdaddr_path"
 #define BT_MAC_PROP1 "persist.service.bdroid.bdaddr"
 #define BT_MAC_PROP2 "ro.boot.btmacaddr"
-#define WIFI_MAC_PROP "/sys/module/bcmdhd/parameters/mac"
 #define WIFI_MAC_FILE "/system/etc/mocha_macaddr.txt"
 #define BT_MAC_FILE "/system/etc/mocha_btmacaddr.txt"
 #define BT_MAC_TAG "XIAOMIBT!"
@@ -77,7 +76,7 @@ exit:
 void set_wifi_mac(FILE *fp)
 {
 	char buf[30];
-	char addr[30];
+	char addr[18];
 	
 	fseek(fp, sizeof(char) * 22, SEEK_SET);
 	fread(buf, sizeof(char), 22, fp);
@@ -107,21 +106,6 @@ void set_wifi_mac(FILE *fp)
 	fclose(wfp);
 	system("chmod 644 /system/etc/mocha_macaddr.txt");
 	
-	snprintf(addr, 30, "0x%x,0x%x,0x%x,0x%x,0x%x,0x%x\n",
-		(unsigned char)buf[14],
-		(unsigned char)buf[13],
-		(unsigned char)buf[12],
-		(unsigned char)buf[11],
-		(unsigned char)buf[10],
-		(unsigned char)buf[9]);
-
-	wfp = fopen(WIFI_MAC_PROP, "w");
-	if (wfp == NULL) {
-		ALOGE("%s: Can't open %s error: %d", TAG, WIFI_MAC_PROP, errno);
-		goto exit;
-	}
-	fwrite(addr, sizeof(unsigned char), 30, wfp);
-	fclose(wfp);
 exit:
 	return;
 }
