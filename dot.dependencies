@@ -1,2 +1,20 @@
 [
+ {
+   "remote": "github",
+   "revision": "oreo",
+   "repository": "SiXROM-OREO/external_busybox",
+   "target_path": "external/busybox"
+ },
+ {
+   "remote": "github",
+   "revision": "lineage-15.1",
+   "repository": "LineageOS/android_hardware_nvidia_thermal",
+   "target_path": "hardware/nvidia/thermal"
+ },
+ {
+   "remote": "github",
+   "revision": "lineage-15.1",
+   "repository": "LineageOS/android_hardware_nvidia_libstagefrighthw",
+   "target_path": "hardware/nvidia/libstagefrighthw"
+ }
 ]
