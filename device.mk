@@ -55,6 +55,10 @@ PRODUCT_PACKAGES += \
     xaplay \
     enctune.conf
 
+# busybox
+PRODUCT_PACKAGES += \
+    busybox
+
 # exFAT tools
 PRODUCT_PACKAGES += \
     mount.exfat
