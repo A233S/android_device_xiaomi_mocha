@@ -1,0 +1,55 @@
+--- system/vold/fs/Ntfs.cpp.orig	2018-04-08 17:44:50.041006022 +0800
++++ system/vold/fs/Ntfs.cpp	2018-04-08 21:48:25.711627406 +0800
+@@ -17,9 +17,15 @@
+ #include "Ntfs.h"
+ #include "Utils.h"
+ 
++#define LOG_TAG "Vold"
++
+ #include <android-base/logging.h>
+ #include <android-base/stringprintf.h>
+ 
++#include <cutils/log.h>
++
++#include <logwrap/logwrap.h>
++
+ #include <vector>
+ #include <string>
+ 
+@@ -55,11 +61,36 @@
+ status_t Mount(const std::string& source, const std::string& target, bool ro,
+         bool remount, bool executable, int ownerUid, int ownerGid, int permMask,
+         bool createLost) {
++    int rc;
++    unsigned long flags;
+     char mountData[255];
+ 
+     const char* c_source = source.c_str();
+     const char* c_target = target.c_str();
+ 
++    flags = MS_NODEV | MS_NOSUID | MS_DIRSYNC | MS_NOATIME;
++
++    flags |= (executable ? 0 : MS_NOEXEC);
++    flags |= (ro ? MS_RDONLY : 0);
++    flags |= (remount ? MS_REMOUNT : 0);
++
++    snprintf(mountData, sizeof(mountData),
++            "utf8,uid=%d,gid=%d,fmask=%o,dmask=%o",
++            ownerUid, ownerGid, permMask, permMask);
++
++    rc = mount(c_source, c_target, "ntfs", flags, mountData);
++
++    if (rc && errno == EROFS) {
++        SLOGE("%s appears to be a read only filesystem - retrying mount RO", c_source);
++        flags |= MS_RDONLY;
++        rc = mount(c_source, c_target, "ntfs", flags, mountData);
++    }
++
++    if (!rc)
++        return rc;
++
++    SLOGE("mount ntfs errno %d, try ntfs-3g again", errno);
++    
+     sprintf(mountData,
+             "utf8,uid=%d,gid=%d,fmask=%o,dmask=%o,"
+             "shortname=mixed,nodev,nosuid,dirsync",
