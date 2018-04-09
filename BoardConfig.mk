@@ -34,12 +34,19 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := cortex-a15
+
+# Binder API
+TARGET_USES_64_BIT_BINDER := true
+
 # Board
 TARGET_BOARD_PLATFORM := tegra
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 # Use unified vendor
 TARGET_TEGRA_VARIANT := shield
+
+# FS
+TARGET_EXFAT_DRIVER := sdfat
 
 # Kernel
 BOARD_KERNEL_CMDLINE := vpr_resize androidboot.selinux=permissive androidboot.hardware=tn8
