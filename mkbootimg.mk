@@ -2,10 +2,15 @@
 INSTALLED_DTIMAGE_TARGET := $(PRODUCT_OUT)/dt.img
 
 $(INSTALLED_DTIMAGE_TARGET): $(INSTALLED_KERNEL_TARGET)
+ifneq ($(TARGET_PREBUILT_KERNEL),)
+	$(call pretty,"Target dt image: $(INSTALLED_DTIMAGE_TARGET)")
+	cp device/xiaomi/mocha/prebuilt/dt.img $@
+	@echo -e ${CL_CYN}"Made DT image: $@"${CL_RST}
+else
 	$(call pretty,"Target dt image: $(INSTALLED_DTIMAGE_TARGET)")
 	cp $(KERNEL_OUT)/arch/arm/boot/dts/tegra124-mocha.dtb $@
 	@echo -e ${CL_CYN}"Made DT image: $@"${CL_RST}
-
+endif
 
 ## Overload bootimg generation: Same as the original, + --dt arg
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(INSTALLED_DTIMAGE_TARGET)
