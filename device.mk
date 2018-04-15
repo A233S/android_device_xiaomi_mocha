@@ -54,14 +54,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     busybox
 
-# exFAT tools
-PRODUCT_PACKAGES += \
-    mount.exfat
-
 # aptXHD
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/aptXHD/libaptX_encoder.so:system/vendor/lib/libaptX_encoder.so \
-    $(LOCAL_PATH)/aptXHD/libaptXHD_encoder.so:system/vendor/lib/libaptXHD_encoder.so
+    $(LOCAL_PATH)/aptXHD/libaptX_encoder.so:$(TARGET_COPY_OUT_VENDOR)/lib/libaptX_encoder.so \
+    $(LOCAL_PATH)/aptXHD/libaptXHD_encoder.so:$(TARGET_COPY_OUT_VENDOR)/lib/libaptXHD_encoder.so
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
