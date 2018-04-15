@@ -128,6 +128,7 @@ PRODUCT_PACKAGES += \
     libtinycompress \
     tinycap_mocha \
     tinymix_mocha \
+    tinypcminfo_mocha \
     tinyplay_mocha \
     libtinyalsa_mocha \
     libtinyalsa \
@@ -164,9 +165,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     conn_init
 
-# Storage
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.sdcardfs=true
+# System properties
+-include $(LOCAL_PATH)/system_prop.mk
 
 PRODUCT_CHARACTERISTICS := tablet
 
