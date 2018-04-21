@@ -40,8 +40,8 @@ BOARD_RAMDISK_OFFSET := 0x02000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 
-TARGET_PREBUILT_KERNEL := device/xiaomi/mocha/prebuilt/kernel
-#TARGET_KERNEL_SOURCE := kernel/xiaomi/mocha
+#TARGET_PREBUILT_KERNEL := device/xiaomi/mocha/prebuilt/kernel
+TARGET_KERNEL_SOURCE := kernel/xiaomi/mocha
 TARGET_KERNEL_CONFIG := tegra12_android_defconfig
 BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_SEPARATED_DT := true
@@ -87,4 +87,19 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard1"
 # disable reboot to recovery/bootloader, shield not support this
 #TW_NO_REBOOT_BOOTLOADER := true
 #TW_NO_REBOOT_RECOVERY := true
+
+# MultiROM
+MR_PIXEL_FORMAT := RGB_565
+MR_INPUT_TYPE := type_b
+MR_INIT_DEVICES := device/xiaomi/mocha/multirom/mr_init_devices.c
+MR_DPI := xhdpi
+MR_DPI_FONT := 320
+MR_FSTAB := device/xiaomi/mocha/multirom/twrp.fstab
+MR_KEXEC_MEM_MIN := 0x85000000
+MR_KEXEC_DTB := true
+MR_DEVICE_HOOKS := device/xiaomi/mocha/multirom/mr_hooks.c
+MR_DEVICE_HOOKS_VER := 3
+MR_DEVICE_VARIANTS := mocha
+MR_USE_MROM_FSTAB := true
+TARGET_RECOVERY_IS_MULTIROM := true
 
