@@ -19,7 +19,7 @@
 
 TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/mocha/include
 TARGET_KERNEL_HAVE_EXFAT := true
-TARGET_KERNEL_HAVE_NTFS := true
+TARGET_KERNEL_HAVE_NTFS := false
 WITH_DEXPREOPT := true
 
 # Architecture
