@@ -35,5 +35,17 @@
             </intent-filter>
         </service>
 
+        <service android:name=".PerformanceProfilesService"></service>
+
+        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+        <receiver
+            android:name=".PerformanceProfilesReceiver"
+            android:label="PerformanceProfilesReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 </manifest>
