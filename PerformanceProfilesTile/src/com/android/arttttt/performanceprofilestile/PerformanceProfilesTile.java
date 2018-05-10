@@ -19,6 +19,7 @@ import android.graphics.drawable.Icon;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
+import android.content.SharedPreferences;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import java.io.InputStreamReader;
 public class PerformanceProfilesTile extends TileService {
 
     private final String TAG = "PerformanceProfilesTile";
+    private final String sPrefName = "PerformanceProfiles";
     private int mCurrentProfile;
 
     @Override
@@ -36,9 +38,8 @@ public class PerformanceProfilesTile extends TileService {
         super.onStartListening();
 
         mCurrentProfile = getProfileProperty();
-        if (mCurrentProfile < 0) {
+        if (mCurrentProfile < 0 || mCurrentProfile > 3) {
             mCurrentProfile = 3;
-            mCurrentProfile = setProfileProperty(mCurrentProfile);
         }
         updateTile();
     }
@@ -66,14 +67,26 @@ public class PerformanceProfilesTile extends TileService {
                 break;
         }
         mCurrentProfile = setProfileProperty(mCurrentProfile);
-        if (mCurrentProfile < 0) {
+        if (mCurrentProfile < 0 || mCurrentProfile > 3) {
             mCurrentProfile = 3;
         }
+        savePref(mCurrentProfile);
         updateTile();
+    }
+
+    private void savePref(int value) {
+        SharedPreferences settings = getApplicationContext().getSharedPreferences(sPrefName, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("profile", value);
+        editor.apply();
     }
 
     private void updateTile() {
 	Tile tile = getQsTile();
+        mCurrentProfile = getProfileProperty();
+        if (mCurrentProfile < 0 || mCurrentProfile > 3) {
+            mCurrentProfile = 3;
+        }
         switch(mCurrentProfile) {
             case 0:
                 tile.setIcon(Icon.createWithResource(this, R.drawable.ic_profile_power_save));
@@ -100,13 +113,11 @@ public class PerformanceProfilesTile extends TileService {
         String line;
 
         try {
-            Log.d(TAG, "execute: getprop sys.perf.profile");
             Process p = Runtime.getRuntime().exec("getprop sys.perf.profile");
             BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
             line = input.readLine();
             input.close();
             if (line != null) {
-                Log.d(TAG, "result: " + line);
                 return Integer.parseInt(line.trim());
             }
         } catch (Exception err) {
@@ -119,7 +130,6 @@ public class PerformanceProfilesTile extends TileService {
 
     private int setProfileProperty(int value) {
         try {
-            Log.d(TAG, "execute: setprop sys.perf.profile " + Integer.toString(value));
             Runtime.getRuntime().exec("setprop sys.perf.profile " + Integer.toString(value));
         } catch (Exception err) {
             Log.d(TAG, "execute failed");
