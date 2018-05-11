@@ -262,7 +262,6 @@
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
-    <add-resource type="integer" name="config_deviceHardwareWakeKeys">71</add-resource>
 <!--
     <integer name="config_deviceHardwareWakeKeys">71</integer>
 -->
@@ -273,5 +272,11 @@
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
     <integer name="config_screenBrightnessSettingMinimum">1</integer>
+
+    <!-- Whether home button can wake device -->
+    <bool name="config_homeCanWake">true</bool>
+
+    <!-- Is Advanced Reboot enabled? -->
+    <bool name="config_advanced_reboot">true</bool>
 
 </resources>
