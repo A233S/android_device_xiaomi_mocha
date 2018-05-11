@@ -15,19 +15,9 @@
  */
 package com.android.arttttt.performanceprofilestile;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.os.UserHandle;
-
-public class PerformanceProfilesReceiver extends BroadcastReceiver {
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            Intent serviceIntent = new Intent(context, PerformanceProfilesService.class);
-            context.startServiceAsUser(serviceIntent, UserHandle.SYSTEM);
-        }
-    }
+public class Constants {
+    public static final String TAG = "PerformanceProfiles";
+    public static final String PREF_FILE = "PerformanceProfiles";
+    public static final String PREF_PROFILE_KEY = "profile";
 }
 
