@@ -29,8 +29,6 @@ import java.io.InputStreamReader;
 
 public class PerformanceProfilesTile extends TileService {
 
-    private final String TAG = "PerformanceProfilesTile";
-    private final String sPrefName = "PerformanceProfiles";
     private int mCurrentProfile;
 
     @Override
@@ -75,9 +73,9 @@ public class PerformanceProfilesTile extends TileService {
     }
 
     private void savePref(int value) {
-        SharedPreferences settings = getApplicationContext().getSharedPreferences(sPrefName, 0);
+        SharedPreferences settings = getApplicationContext().getSharedPreferences(Constants.PREF_FILE, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putInt("profile", value);
+        editor.putInt(Constants.PREF_PROFILE_KEY, value);
         editor.apply();
     }
 
@@ -121,18 +119,19 @@ public class PerformanceProfilesTile extends TileService {
                 return Integer.parseInt(line.trim());
             }
         } catch (Exception err) {
-            Log.d(TAG, "execute failed");
+            Log.d(Constants.TAG, "execute failed");
             err.printStackTrace();
         }
-        Log.d(TAG, "can't get sys.perf.profile value, return -1");
+        Log.d(Constants.TAG, "can't get sys.perf.profile value, return -1");
         return -1;
     }
 
     private int setProfileProperty(int value) {
         try {
+            Log.d(Constants.TAG, "setProfileProperty(" + Integer.toString(value) + ")");
             Runtime.getRuntime().exec("setprop sys.perf.profile " + Integer.toString(value));
         } catch (Exception err) {
-            Log.d(TAG, "execute failed");
+            Log.d(Constants.TAG, "execute failed");
             err.printStackTrace();
         }
         return getProfileProperty();
