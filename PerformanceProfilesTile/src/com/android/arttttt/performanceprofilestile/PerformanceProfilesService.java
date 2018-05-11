@@ -30,9 +30,6 @@ import java.io.InputStreamReader;
 
 public class PerformanceProfilesService extends Service {
 
-    private final String TAG = "PerformanceProfilesService";
-    private final String sPrefName = "PerformanceProfiles";
-
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -42,21 +39,22 @@ public class PerformanceProfilesService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        SharedPreferences settings = getApplicationContext().getSharedPreferences(sPrefName, 0);
-        int profile = settings.getInt("profile", 0);
-        Log.d(TAG, "profile = " + Integer.toString(profile));
+        SharedPreferences settings = getApplicationContext().getSharedPreferences(Constants.PREF_FILE, 0);
+        int profile = settings.getInt(Constants.PREF_PROFILE_KEY, 0);
+        Log.d(Constants.TAG, "saved profile = " + Integer.toString(profile));
         if (profile < 0 || profile > 3) {
             profile = 3;
         }
         setProfileProperty(profile);
+        stopSelf();
     }
 
     private void setProfileProperty(int value) {
         try {
-            Log.d(TAG, "setProfileProperty(" + Integer.toString(value) + ")");
+            Log.d(Constants.TAG, "setProfileProperty(" + Integer.toString(value) + ")");
             Runtime.getRuntime().exec("setprop sys.perf.profile " + Integer.toString(value));
         } catch (Exception err) {
-            Log.d(TAG, "execute failed");
+            Log.d(Constants.TAG, "execute failed");
             err.printStackTrace();
         }
         return;
