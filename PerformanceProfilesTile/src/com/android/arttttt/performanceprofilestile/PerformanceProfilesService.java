@@ -15,7 +15,7 @@
  */
 package com.android.arttttt.performanceprofilestile;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
 import android.os.IBinder;
 
@@ -28,13 +28,12 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class PerformanceProfilesService extends Service {
+public class PerformanceProfilesService extends IntentService {
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public PerformanceProfilesService() {
+        super("PerformanceProfilesService");
     }
- 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -46,7 +45,11 @@ public class PerformanceProfilesService extends Service {
             profile = 3;
         }
         setProfileProperty(profile);
-        stopSelf();
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        return;
     }
 
     private void setProfileProperty(int value) {
