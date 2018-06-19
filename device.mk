@@ -130,6 +130,10 @@ PRODUCT_PACKAGES += \
     xaplay \
     enctune.conf
 
+# libxml2
+PRODUCT_PACKAGES += \
+    libxml2
+
 # Bluetooth
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
