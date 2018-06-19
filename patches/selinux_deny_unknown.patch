@@ -1,0 +1,25 @@
+--- aex-o/external/selinux/libselinux/src/deny_unknown.c.orig	2018-06-19 13:51:21.804481911 +0800
++++ aex-o/external/selinux/libselinux/src/deny_unknown.c	2018-06-19 14:12:46.826837689 +0800
+@@ -8,9 +8,14 @@
+ #include "policy.h"
+ #include <stdio.h>
+ #include <limits.h>
++#include <selinux/avc.h>
++#include "avc_internal.h"
+ 
+ int security_deny_unknown(void)
+ {
++	avc_log(SELINUX_INFO, "security_deny_unknown() return 0");
++	return 0;
++/*
+ 	int fd, ret, deny_unknown = 0;
+ 	char path[PATH_MAX];
+ 	char buf[20];
+@@ -35,6 +40,7 @@
+ 		return -1;
+ 
+ 	return deny_unknown;
++*/
+ }
+ 
+ hidden_def(security_deny_unknown);
