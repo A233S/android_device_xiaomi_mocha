@@ -116,6 +116,10 @@ PRODUCT_PACKAGES += \
     busybox \
     busybox_links
 
+# libxml2
+PRODUCT_PACKAGES += \
+    libxml2
+
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
