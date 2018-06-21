@@ -59,6 +59,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     busybox
 
+# libxml2
+PRODUCT_PACKAGES += \
+    libxml2
+
 # aptXHD
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/aptXHD/libaptX_encoder.so:$(TARGET_COPY_OUT_VENDOR)/lib/libaptX_encoder.so \
