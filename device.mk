@@ -54,9 +54,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     busybox
 
-# exFAT tools
+# libxml2
 PRODUCT_PACKAGES += \
-    mount.exfat
+    libxml2
 
 # aptXHD
 PRODUCT_COPY_FILES += \

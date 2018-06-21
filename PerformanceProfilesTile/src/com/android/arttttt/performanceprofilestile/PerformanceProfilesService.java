@@ -39,7 +39,7 @@ public class PerformanceProfilesService extends IntentService {
         super.onCreate();
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences(Constants.PREF_FILE, 0);
-        int profile = settings.getInt(Constants.PREF_PROFILE_KEY, 0);
+        int profile = settings.getInt(Constants.PREF_PROFILE_KEY, 3);
         Log.d(Constants.TAG, "saved profile = " + Integer.toString(profile));
         if (profile < 0 || profile > 3) {
             profile = 3;
