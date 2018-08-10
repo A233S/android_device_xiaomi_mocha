@@ -1,7 +1,4 @@
 subdirs = [
-    "light",
-    "power",
-    "sensors",
-    "tinyalsa",
-    "vibrator"
+    "hidl",
+    "tinyalsa"
 ]
