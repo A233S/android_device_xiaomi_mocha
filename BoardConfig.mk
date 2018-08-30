@@ -19,6 +19,8 @@
 
 TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/mocha/include
 
+SELINUX_IGNORE_NEVERALLOWS := true
+
 # Architecture
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
