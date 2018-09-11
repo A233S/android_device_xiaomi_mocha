@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package org.lineageos.hardware;
+package org.mokee.hardware;
 
-import org.lineageos.hardware.ReadingEnhancement;
-import org.lineageos.internal.util.FileUtils;
+import org.mokee.hardware.ReadingEnhancement;
+import org.mokee.internal.util.FileUtils;
 
 public class DisplayColorCalibration {
 
