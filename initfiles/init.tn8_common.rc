@@ -22,6 +22,7 @@ on late-fs
     start surfaceflinger
     start bootanim
 
+    start hwcomposer-2-1
     start configstore-hal
     start gralloc-2-0
 
