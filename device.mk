@@ -77,6 +77,7 @@ PRODUCT_COPY_FILES += \
     
 # Custom tiles
 PRODUCT_PACKAGES += \
+    ChargerTile \
     PerformanceTile
     
 # Filesystem management tools
