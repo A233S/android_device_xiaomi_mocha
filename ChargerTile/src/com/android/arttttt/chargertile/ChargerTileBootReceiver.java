@@ -23,7 +23,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import org.cyanogenmod.internal.util.FileUtils;
+//import org.cyanogenmod.internal.util.FileUtils;
+import android.util.Log;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ChargerTileBootReceiver extends BroadcastReceiver {
 
@@ -33,7 +37,16 @@ public class ChargerTileBootReceiver extends BroadcastReceiver {
             int chargingDisabledByUser = PreferencesUtils
                                             .getInstance(context)
                                             .getInt(Constants.PREF_CHARGING_DISABLED_KEY);
-            FileUtils.writeLine(Constants.PROCFS_PROP_PATH, String.valueOf(chargingDisabledByUser));
+            //FileUtils.writeLine(Constants.PROCFS_PROP_PATH, String.valueOf(chargingDisabledByUser));
+            try {
+                FileWriter writer = new FileWriter(Constants.PROCFS_PROP_PATH);
+                writer.write(String.valueOf(chargingDisabledByUser));
+                writer.flush();
+                writer.close();
+            } catch (Exception err) {
+                Log.d("ChargeTile", "FiltWriter failed");
+                err.printStackTrace();
+            }
         }
     }
 }
