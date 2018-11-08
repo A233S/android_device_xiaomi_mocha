@@ -5,8 +5,8 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
     $(call all-java-files-under, src)
 
-LOCAL_STATIC_JAVA_LIBRARIES := \
-    org.lineageos.platform.internal
+#LOCAL_STATIC_JAVA_LIBRARIES := \
+#    org.lineageos.platform.internal
 
 LOCAL_RESOURCE_DIR := \
     $(LOCAL_PATH)/res
