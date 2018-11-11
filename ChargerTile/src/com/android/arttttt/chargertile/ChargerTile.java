@@ -22,7 +22,11 @@ import com.android.arttttt.chargertile.utils.PreferencesUtils;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
-import org.lineageos.internal.util.FileUtils;
+//import org.lineageos.internal.util.FileUtils;
+import android.util.Log;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ChargerTile extends TileService {
 
@@ -45,7 +49,16 @@ public class ChargerTile extends TileService {
         
         mChargingDisabledByUser = mChargingDisabledByUser == 1 ? 0 : 1;
         mPreferencesUtils.putInt(Constants.PREF_CHARGING_DISABLED_KEY, mChargingDisabledByUser);
-        FileUtils.writeLine(Constants.PROCFS_PROP_PATH, String.valueOf(mChargingDisabledByUser));
+        //FileUtils.writeLine(Constants.PROCFS_PROP_PATH, String.valueOf(mChargingDisabledByUser));
+        try {
+            FileWriter writer = new FileWriter(Constants.PROCFS_PROP_PATH);
+            writer.write(String.valueOf(mChargingDisabledByUser));
+            writer.flush();
+            writer.close();
+        } catch (Exception err) {
+            Log.d("ChargeTile", "FiltWriter failed");
+            err.printStackTrace();
+        }
         
         updateTile();
     }
