@@ -47,8 +47,8 @@ PRODUCT_PACKAGES += \
     enctune.conf
 
 # busybox
-PRODUCT_PACKAGES += \
-    busybox
+#PRODUCT_PACKAGES += \
+#    busybox
 
 # libxml2
 PRODUCT_PACKAGES += \
@@ -56,8 +56,8 @@ PRODUCT_PACKAGES += \
 
 # aptXHD
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/aptXHD/libaptX_encoder.so:$(TARGET_COPY_OUT_VENDOR)/lib/libaptX_encoder.so \
-    $(LOCAL_PATH)/aptXHD/libaptXHD_encoder.so:$(TARGET_COPY_OUT_VENDOR)/lib/libaptXHD_encoder.so
+    $(LOCAL_PATH)/aptXHD/libaptX_encoder.so:$(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/libaptX_encoder.so \
+    $(LOCAL_PATH)/aptXHD/libaptXHD_encoder.so:$(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/libaptXHD_encoder.so
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
@@ -141,7 +141,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:system/etc/permissions/android.hardware.sensor.stepcounter.xml \
-    frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml
+    frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml \
+    frameworks/native/data/etc/android.software.freeform_window_management.xml:system/etc/permissions/android.software.freeform_window_management.xml
     
 # Ramdisk
 PRODUCT_PACKAGES += \

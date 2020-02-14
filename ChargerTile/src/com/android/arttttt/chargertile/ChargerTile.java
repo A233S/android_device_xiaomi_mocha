@@ -22,7 +22,6 @@ import com.android.arttttt.chargertile.utils.PreferencesUtils;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
-//import org.lineageos.internal.util.FileUtils;
 import android.util.Log;
 import java.io.File;
 import java.io.FileWriter;
