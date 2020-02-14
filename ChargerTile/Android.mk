@@ -6,7 +6,8 @@ LOCAL_SRC_FILES := \
     $(call all-java-files-under, src)
 
 #LOCAL_STATIC_JAVA_LIBRARIES := \
-#    org.lineageos.platform.internal
+#    org.lineageos.platform.internal \
+#    lineage-15.1:undervoltagetile/Android.mk
 
 LOCAL_RESOURCE_DIR := \
     $(LOCAL_PATH)/res
