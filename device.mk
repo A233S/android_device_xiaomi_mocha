@@ -46,14 +46,6 @@ PRODUCT_PACKAGES += \
     xaplay \
     enctune.conf
 
-# busybox
-#PRODUCT_PACKAGES += \
-#    busybox
-
-# libxml2
-PRODUCT_PACKAGES += \
-    libxml2
-
 # aptXHD
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/aptXHD/libaptX_encoder.so:$(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/libaptX_encoder.so \
@@ -174,6 +166,10 @@ PRODUCT_CHARACTERISTICS := tablet
 
 # Thermal
 PRODUCT_PACKAGES += thermal.tegra
+
+# libxml2
+PRODUCT_PACKAGES += \
+    libxml2
 
 # Vendor seccomp policy files for media components:
 PRODUCT_COPY_FILES += \
