@@ -2,7 +2,8 @@
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.bt.enableAptXHD=true \
     persist.service.btui.use_aptx=1 \
-    persistent.bt.a2dp_offload_cap=sbc-aptx-aptXHD
+    persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac \
+    persist.vendor.btstack.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldacs
 
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
