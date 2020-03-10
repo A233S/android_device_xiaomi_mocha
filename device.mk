@@ -69,6 +69,7 @@ PRODUCT_COPY_FILES += \
     
 # Custom tiles
 PRODUCT_PACKAGES += \
+    ChargerTile \
     PerformanceTile
     
 # Filesystem management tools
@@ -139,10 +140,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:system/etc/permissions/android.hardware.sensor.stepcounter.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml
-    
-# Power
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service.mocha
     
 # Ramdisk
 PRODUCT_PACKAGES += \
