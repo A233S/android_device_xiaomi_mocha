@@ -267,7 +267,7 @@
     <bool name="config_freeformWindowManagement">true</bool>
 
     <!-- The list of components which should be automatically disabled for a specific device. -->
-    <string-array name="config_deviceDisabledComponents" translatable="false">
+    <string-array name="config_disabledComponents" translatable="false">
         <item>com.google.android.gms/com.google.android.gms.nearby.messages.service.NearbyMessagesService</item>
     </string-array>
     
