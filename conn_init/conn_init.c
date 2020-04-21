@@ -121,8 +121,15 @@ int main(void)
 
         fp = fopen(BT_MAC_FILE, "r");
 	if (fp != NULL) {
+		char addr[18];
 		bt_mac_exist = 1;
+		fseek(fp, 0, SEEK_SET);
+		fread(addr, sizeof(char), 17, fp);
+		addr[17] = '\0';
 		fclose(fp);
+		property_set(BT_MAC_PROP, BT_MAC_FILE);
+		property_set(BT_MAC_PROP1, addr);
+		property_set(BT_MAC_PROP2, addr);
 	}
         fp = fopen(WIFI_MAC_FILE, "r");
 	if (fp != NULL) {
