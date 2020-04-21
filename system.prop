@@ -30,6 +30,7 @@ media.stagefright.less-secure=true
 ro.adb.secure=0
 ro.secure=0
 ro.lineage.build.vendor_security_patch=2018-01-01
+persist.sys.ui.hw=true
 debug.sf.disable_hwc=1
 # debug.hwui.renderer=skiavk
 ro.bt.bdaddr_path=/data/mocha_btmacaddr.txt
