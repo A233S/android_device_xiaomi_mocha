@@ -193,3 +193,8 @@ PRODUCT_PACKAGES += \
 # wifi and bt macs settter
 PRODUCT_PACKAGES += \
     conn_init
+
+# Vendor Patch Level
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.security_patch=2018-01-01
+
