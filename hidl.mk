@@ -13,10 +13,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl
 
-# GNSS
-PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl
-
 # Graphics
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
@@ -46,7 +42,7 @@ PRODUCT_PACKAGES += \
 # Memtrack
 PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service-nvidia
+    android.hardware.memtrack@1.0-service
 
 # Power
 PRODUCT_PACKAGES += \
