@@ -10,8 +10,9 @@ cc_binary {
     ],
 
     cflags: [
-        "-Wall",
         "-Werror",
+        "-Wno-error=unused-parameter",
+        "-Wno-unused-parameter",
     ],
 
     shared_libs: [
@@ -23,6 +24,5 @@ cc_binary {
         "libhidlbase",
         "libhidltransport",
         "android.hardware.power@1.0",
-        "vendor.lineage.power@1.0",
     ],
 }

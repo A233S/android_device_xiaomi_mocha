@@ -1,0 +1,11 @@
+--- packages/apps/Settings/src/com/android/settings/connecteddevice/usb/UsbBackend.java.orig	2018-09-02 21:04:28.243352487 +0800
++++ packages/apps/Settings/src/com/android/settings/connecteddevice/usb/UsbBackend.java	2018-09-03 06:33:44.569540273 +0800
+@@ -100,7 +100,7 @@
+ 
+     public int getDataRole() {
+         updatePorts();
+-        return mPortStatus == null ? UsbPort.DATA_ROLE_NONE : mPortStatus.getCurrentDataRole();
++        return mPortStatus == null ? UsbPort.DATA_ROLE_DEVICE : mPortStatus.getCurrentDataRole();
+     }
+ 
+     public void setPowerRole(int role) {
