@@ -19,7 +19,7 @@
 
 TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/mocha/include
 
-SELINUX_IGNORE_NEVERALLOWS := true
+#SELINUX_IGNORE_NEVERALLOWS := true
 
 # Architecture
 TARGET_CPU_ABI := armeabi-v7a
@@ -31,7 +31,8 @@ TARGET_CPU_VARIANT := cortex-a15
 # Audio
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_ALSA_AUDIO := true
-BOARD_USES_TINYHAL_AUDIO := true
+TARGET_EXCLUDES_AUDIOFX := true
+TARGET_LD_SHIM_LIBS := /system/vendor/lib/hw/audio.primary.vendor.tegra.so|libmocha_audio.so
 
 # Binder API
 TARGET_USES_64_BIT_BINDER := true
@@ -56,12 +57,14 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_EXFAT_DRIVER := sdfat
 TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USES_MKE2FS := true
 
 # Graphics
 USE_OPENGL_RENDERER := true
 BOARD_DISABLE_TRIPLE_BUFFERED_DISPLAY_SURFACES := true
+#VSYNC_EVENT_PHASE_OFFSET_NS := 1000000
+#SF_VSYNC_EVENT_PHASE_OFFSET_NS := 1000000
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
@@ -79,8 +82,6 @@ BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 
 TARGET_KERNEL_SOURCE := kernel/xiaomi/mocha
 TARGET_KERNEL_CONFIG := tegra12_android_defconfig
-KERNEL_TOOLCHAIN := $(OUT_DIR)/../prebuilts/gcc/$(HOST_OS)-x86/arm/linaro-4.9.4/bin
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-gnueabihf-
 BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
@@ -96,7 +97,8 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20971520
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # LINEAGEHW
-BOARD_HARDWARE_CLASS := device/xiaomi/mocha/lineagehw
+#BOARD_HARDWARE_CLASS := device/xiaomi/mocha/lineagehw
+JAVA_SOURCE_OVERLAYS := device/xiaomi/mocha/lineagehw|**/*.java
 
 # Offmode Charging
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
@@ -121,6 +123,8 @@ OVERRIDE_RS_DRIVER := libnvRSDriver.so
 BOARD_SEPOLICY_DIRS += device/xiaomi/mocha/sepolicy/common \
                        device/xiaomi/mocha/sepolicy/lineage-common \
                        device/xiaomi/mocha/sepolicy/mocha
+
+SELINUX_IGNORE_NEVERALLOWS := true
                        
 # ThermalHAL
 TARGET_THERMALHAL_VARIANT := tegra
@@ -142,4 +146,4 @@ WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path
 #WIFI_DRIVER_MODULE_NAME          := "bcmdhd"
                        
 # Zygote whitelist extra paths
-ZYGOTE_WHITELIST_PATH_EXTRA := \"/dev/nvhost-ctrl\",
+ZYGOTE_WHITELIST_PATH_EXTRA := \"/dev/nvhost-ctrl\",\"/dev/nvmap\",
