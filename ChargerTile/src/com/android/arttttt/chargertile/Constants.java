@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 twu2
+ * Copyright (C) 2018 arttttt <artem-bambalov@yandex.ru>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.arttttt.performanceprofilestile;
+ 
+package com.android.arttttt.chargertile;
 
 public class Constants {
-    public static final String TAG = "PerformanceProfiles";
-    public static final String PREF_FILE = "PerformanceProfiles";
-    public static final String PREF_PROFILE_KEY = "profile";
+    public static final String PREF_CHARGING_DISABLED_KEY = "charging_disabled";
+    public static final String PROCFS_PROP_PATH = "/proc/charger/force_disable";
 }
-

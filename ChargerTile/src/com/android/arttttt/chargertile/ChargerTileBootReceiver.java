@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 twu2
+ * Copyright (C) 2018 arttttt <artem-bambalov@yandex.ru>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.arttttt.performanceprofilestile;
+ 
+package com.android.arttttt.chargertile;
+
+import com.android.arttttt.chargertile.Constants;
+import com.android.arttttt.chargertile.utils.PreferencesUtils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.UserHandle;
 
-public class PerformanceProfilesReceiver extends BroadcastReceiver {
+import org.lineageos.internal.util.FileUtils;
+
+public class ChargerTileBootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            Intent serviceIntent = new Intent(context, PerformanceProfilesService.class);
-            context.startServiceAsUser(serviceIntent, UserHandle.SYSTEM);
+            int chargingDisabledByUser = PreferencesUtils
+                                            .getInstance(context)
+                                            .getInt(Constants.PREF_CHARGING_DISABLED_KEY);
+            FileUtils.writeLine(Constants.PROCFS_PROP_PATH, String.valueOf(chargingDisabledByUser));
         }
     }
 }
-
