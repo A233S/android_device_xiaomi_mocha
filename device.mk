@@ -28,36 +28,24 @@ PRODUCT_COPY_FILES_OVERRIDES += \
 
 # Audio
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/media/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-    $(LOCAL_PATH)/media/audio.mocha.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio.mocha.xml \
-    $(LOCAL_PATH)/media/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf
+    $(LOCAL_PATH)/media/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/media/nvaudio_conf.xml:system/etc/nvaudio_conf.xml
     
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
     audio.primary.tegra \
-    libaudiohalcm \
     libaudio-resampler \
     libaudiospdif \
     libstagefrighthw \
-    libtinycompress \
-    tinycap_mocha \
-    tinymix_mocha \
-    tinypcminfo_mocha \
-    tinyplay_mocha \
-    libtinyalsa_mocha \
-    libtinyalsa \
+    tinycap \
+    tinymix \
+    tinyplay \
+    libstlport \
+    libmocha_audio \
     xaplay \
     enctune.conf
-
-# busybox
-PRODUCT_PACKAGES += \
-    busybox
-
-# libxml2
-PRODUCT_PACKAGES += \
-    libxml2
 
 # aptXHD
 PRODUCT_COPY_FILES += \
@@ -116,7 +104,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/permissions/com.nvidia.feature.xml:system/etc/permissions/com.nvidia.feature.xml \
     $(LOCAL_PATH)/permissions/com.nvidia.feature.opengl4.xml:system/etc/permissions/com.nvidia.feature.opengl4.xml \
     $(LOCAL_PATH)/permissions/com.nvidia.nvsi.xml:system/etc/permissions/com.nvidia.nvsi.xml
-NV_ANDROID_FRAMEWORK_ENHANCEMENTS := true
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
@@ -146,7 +133,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:system/etc/permissions/android.hardware.sensor.stepcounter.xml \
-    frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml
+    frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml \
+    frameworks/native/data/etc/android.software.freeform_window_management.xml:system/etc/permissions/android.software.freeform_window_management.xml
     
 # Ramdisk
 PRODUCT_PACKAGES += \
@@ -178,6 +166,10 @@ PRODUCT_CHARACTERISTICS := tablet
 
 # Thermal
 PRODUCT_PACKAGES += thermal.tegra
+
+# libxml2
+PRODUCT_PACKAGES += \
+    libxml2
 
 # Vendor seccomp policy files for media components:
 PRODUCT_COPY_FILES += \
